@@ -15,4 +15,4 @@
 **Run tests :**
 
     -   truffle test
-    (Note that you must have started the context and migrated the contracts in order to test)
+    (Note that you must have started the context and migrated the contract in order to run the test)
