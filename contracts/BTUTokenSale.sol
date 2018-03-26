@@ -20,33 +20,21 @@ contract BTUTokenSale is Ownable {
     uint public constant FROSTED_FOUNDERS_LOCKUP = 1;   // 1 year lockup
 
     address private companyAddress;
-    uint256 private companyReserved;
+    uint256 public companyReserved;
 
     address private foundersAddress;
-    uint256 private foundersReserved;
+    uint256 public foundersReserved;
 
     address private bountyAddress;
-    uint256 private bountyReserved;
+    uint256 public bountyReserved;
 
     uint256 public assignedTokens;
 
-    BTU private btuToken;
+    address private btuToken;
 
-    function BTUTokenSale(address _btuAddress,
-                          address _companyAddress,
-                          address _foundersAddress,
-                          address _bountyAddress) public {
+    function BTUTokenSale(address _btuAddress) public {
         owner = msg.sender;
-        btuToken = BTU(_btuAddress);
-        companyAddress = _companyAddress;
-        foundersAddress = _foundersAddress;
-        bountyAddress = _bountyAddress;
-        // Reserve the frosted tokens
-        companyReserved = SafeMath.div(SafeMath.mul(btuToken.INITIAL_SUPPLY(), FROST_COMPANY_FACTOR), 100);
-        foundersReserved = SafeMath.div(SafeMath.mul(btuToken.INITIAL_SUPPLY(), FROST_FOUNDERS_FACTOR), 100);
-        bountyReserved = SafeMath.div(SafeMath.mul(btuToken.INITIAL_SUPPLY(), FROST_BOUNTY_FACTOR), 100);
-        // Keep track of the number of assigned tokens
-        assignedTokens = SafeMath.add(SafeMath.add(companyReserved, foundersReserved), bountyReserved);
+        btuToken = _btuAddress;
     }
 
     /* Assignment of tokens has to be done by the owner of the BTUToken
@@ -62,8 +50,25 @@ contract BTUTokenSale is Ownable {
         for (uint i = 0; i < _batchAddr.length; ++i) {
             uint amount = _batchAmount[i];
             assignedTokens = SafeMath.add(assignedTokens, amount);
-            btuToken.transferFrom(msg.sender, _batchAddr[i], amount);
+            BTU(btuToken).transferFrom(msg.sender, _batchAddr[i], amount);
         }
+    }
+
+    /* Sets the frosted account for the company, the founders and the bounty */
+    function setupFrostedAccounts(address _companyAddress,
+                                  address _foundersAddress,
+                                  address _bountyAddress) public onlyOwner {
+        companyAddress = _companyAddress;
+        foundersAddress = _foundersAddress;
+        bountyAddress = _bountyAddress;
+        // Reserve the frosted tokens
+        uint256 initialSupply = BTU(btuToken).totalSupply();
+        companyReserved = SafeMath.div(SafeMath.mul(initialSupply, FROST_COMPANY_FACTOR), 100);
+        foundersReserved = SafeMath.div(SafeMath.mul(initialSupply, FROST_FOUNDERS_FACTOR), 100);
+        bountyReserved = SafeMath.div(SafeMath.mul(initialSupply, FROST_BOUNTY_FACTOR), 100);
+        // Keep track of the number of assigned tokens
+        assignedTokens = SafeMath.add(companyReserved, foundersReserved);
+        assignedTokens = SafeMath.add(assignedTokens, bountyReserved);
     }
 
     // Frost period for the frosted company tokens
@@ -74,7 +79,7 @@ contract BTUTokenSale is Ownable {
     // Defrost company reserved tokens
     function defrostCompanyTokens() public onlyOwner {
         require(now > defrostCompanyDate());
-        btuToken.transferFrom(msg.sender, companyAddress, companyReserved);
+        BTU(btuToken).transferFrom(msg.sender, companyAddress, companyReserved);
     }
 
     // Frost period for the frosted founders tokens
@@ -85,16 +90,16 @@ contract BTUTokenSale is Ownable {
     // Defrost founders reserved tokens (only usable after the frost period is over)
     function defrostFoundersTokens() public onlyOwner {
         require(now > defrostFoundersDate());
-        btuToken.transferFrom(msg.sender, foundersAddress, foundersReserved);
+        BTU(btuToken).transferFrom(msg.sender, foundersAddress, foundersReserved);
     }
 
     // No frost period for the bounty, the owner can defrost at will
     function defrostBountyTokens() public onlyOwner {
-        btuToken.transferFrom(msg.sender, bountyAddress, bountyReserved);
+        BTU(btuToken).transferFrom(msg.sender, bountyAddress, bountyReserved);
     }
 
     // Selfdestruct this contract
-    function destructContract() onlyOwner {
+    function destructContract() public onlyOwner {
         selfdestruct(owner);
     }
 }
