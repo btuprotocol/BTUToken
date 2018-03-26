@@ -1,3 +1,16 @@
+# BTU Token
+
+The BTU Token is the reference implementation for the BTU protocol on Ethereum, written in solidity. A token sale contract (BTUTokenSale) is also present in this repository, it will be complemented by scripts to assign tokens when the BTUToken is released.
+
+## Smart contracts
+ ### BTUToken
+ Implemented using zeppelin's framework, the `BookingTokenUnit` is an ERC-20 capped token. The cap is defined by the initial supply which is 100M tokens. The symbol for the token is `BTU` and it has 18 decimals.
+
+ ### BTUTokenSale
+ The token sale contract will allow the owner of the BTUToken to assign tokens to investors when the release date is reached.
+
+## Technical part  
+
 **General requirements  :**
 
     -   Node.js server v8 or higher (build with v9.8.0) https://nodejs.org/en/download/
