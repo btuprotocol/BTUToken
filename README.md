@@ -1,6 +1,7 @@
 # BTU Token
 
-The BTU Token is the reference implementation for the BTU protocol on Ethereum, written in solidity. A token sale contract (BTUTokenSale) is also present in this repository, it will be complemented by scripts to assign tokens when the BTUToken is released.
+The BTU Token is the ERC-20 token smart contract token to be used in conjonction with the ERC-808 smart contract in order to make reservations over the BTU Protocol.
+A token sale contract (BTUTokenSale) is also present in this repository, it will be complemented by scripts to assign tokens when the BTUToken is released
 
 ## Smart contracts
  ### BTUToken
