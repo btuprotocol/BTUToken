@@ -17,18 +17,18 @@ import "zeppelin-solidity/contracts/token/ERC20/CappedToken.sol";
  * We can use a modifier called 'onlyOwner' after public keyword to allow
  * an action only for the owner.
  */
-contract BTU is CappedToken(100000000 * 10 ** 18) {
+contract BTU is CappedToken {
     string public name = "BookingTokenUnit";
     string public symbol = "BTU";
     uint8 public decimals = 18;
-    uint public INITIAL_SUPPLY = 100000000 * 10 ** 18;
+    uint public constant INITIAL_SUPPLY = 100000000 * 10 ** 18;
 
     /**
      * On construction, the owner balance is set with
      * the INITIAL_FUNDS amount.
      * Distribution of BTUs can be done from the owner address.
      */
-    function BTU() public {
+    function BTU() public CappedToken(INITIAL_SUPPLY) {
         totalSupply_ = INITIAL_SUPPLY;
         balances[msg.sender] = INITIAL_SUPPLY;
     }
