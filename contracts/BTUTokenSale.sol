@@ -30,11 +30,11 @@ contract BTUTokenSale is Ownable {
 
     uint256 public assignedTokens;
 
-    address private btuToken;
+    address public btuToken;
 
-    function BTUTokenSale(address _btuAddress) public {
+    function BTUTokenSale() public {
         owner = msg.sender;
-        btuToken = _btuAddress;
+        btuToken = new BTU();
     }
 
     /* Assignment of tokens has to be done by the owner of the BTUToken
@@ -50,7 +50,7 @@ contract BTUTokenSale is Ownable {
         for (uint i = 0; i < _batchAddr.length; ++i) {
             uint amount = _batchAmount[i];
             assignedTokens = SafeMath.add(assignedTokens, amount);
-            BTU(btuToken).transferFrom(msg.sender, _batchAddr[i], amount);
+            BTU(btuToken).transferFrom(this, _batchAddr[i], amount);
         }
     }
 
