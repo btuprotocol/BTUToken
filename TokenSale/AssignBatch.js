@@ -75,6 +75,30 @@ function getBTUToken() {
     });
 }
 
+function assignBatch(account, addrs, amnts) {
+    return new Promise(function(resolve, reject) {
+        btuTokenSale.methods.assignTokens(addrs, amnts).estimateGas({from: account}).then(function(estimatedGas) {
+            console.log("Estimated gas = " + estimatedGas);
+            // Add 10% to the gas limit
+            let gasLimit = estimatedGas + Math.ceil(10 * estimatedGas / 100);
+            console.log("GasLimit = " + gasLimit);
+            btuTokenSale.methods.assignTokens(addrs, amnts).send({from: account, gas: gasLimit}, function(err, res) {
+                if (err) {
+                    console.log("Error assigning tokens: " + err);
+                    return reject(err);
+                }
+                resolve(res);
+            });
+        });
+    });
+}
+
+async function assignTokens(account, addrs, amnts) {
+    for(let i = 0; i < addresses.length; ++i) {
+        await assignBatch(account, addrs.splice(0, 5), amnts.splice(0, 5));
+    }
+}
+
 web3.eth.getAccounts(function(error, accounts) {
     console.log("Using account: " + accounts[0]);
     let totalAllowance = amounts.reduce((a, b) => a + b, 0);
@@ -86,19 +110,7 @@ web3.eth.getAccounts(function(error, accounts) {
             console.log("TokenSaleAddress Balance = " + result);
         });
 
-        btuTokenSale.methods.assignTokens(addresses, amounts).estimateGas({from: accounts[0]}).then(function(estimatedGas) {
-            console.log("Estimated gas = " + estimatedGas);
-            // Add 10% to the gas limit
-            let gasLimit = estimatedGas + Math.ceil(10 * estimatedGas / 100);
-            console.log("GasLimit = " + gasLimit);
-            btuTokenSale.methods.assignTokens(addresses, amounts).send({from: accounts[0], gas: gasLimit}, function(err, res) {
-                if (err) {
-                    console.log("Error assigning tokens: " + err);
-                    return err;
-                }
-                console.log("done");
-            });
-        });
+        assignTokens(accounts[0], addresses, amounts);
 
     }, function(err) {
         console.log(err);
