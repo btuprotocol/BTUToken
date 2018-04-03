@@ -50,7 +50,7 @@ contract BTUTokenSale is Ownable {
         for (uint i = 0; i < _batchAddr.length; ++i) {
             uint amount = _batchAmount[i];
             assignedTokens = SafeMath.add(assignedTokens, amount);
-            BTU(btuToken).transferFrom(this, _batchAddr[i], amount);
+            BTU(btuToken).transfer(_batchAddr[i], amount);
         }
     }
 
@@ -79,7 +79,7 @@ contract BTUTokenSale is Ownable {
     // Defrost company reserved tokens
     function defrostCompanyTokens() public onlyOwner {
         require(now > defrostCompanyDate());
-        BTU(btuToken).transferFrom(msg.sender, companyAddress, companyReserved);
+        BTU(btuToken).transfer(companyAddress, companyReserved);
     }
 
     // Frost period for the frosted founders tokens
@@ -90,12 +90,12 @@ contract BTUTokenSale is Ownable {
     // Defrost founders reserved tokens (only usable after the frost period is over)
     function defrostFoundersTokens() public onlyOwner {
         require(now > defrostFoundersDate());
-        BTU(btuToken).transferFrom(msg.sender, foundersAddress, foundersReserved);
+        BTU(btuToken).transfer(foundersAddress, foundersReserved);
     }
 
     // No frost period for the bounty, the owner can defrost at will
     function defrostBountyTokens() public onlyOwner {
-        BTU(btuToken).transferFrom(msg.sender, bountyAddress, bountyReserved);
+        BTU(btuToken).transfer(bountyAddress, bountyReserved);
     }
 
     // Selfdestruct this contract
