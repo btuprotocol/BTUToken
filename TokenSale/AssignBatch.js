@@ -77,6 +77,7 @@ function getBTUToken() {
 
 function assignBatch(account, addrs, amnts) {
     return new Promise(function(resolve, reject) {
+
         btuTokenSale.methods.assignTokens(addrs, amnts).estimateGas({from: account}).then(function(estimatedGas) {
             console.log("Estimated gas = " + estimatedGas);
             // Add 10% to the gas limit
