@@ -31,10 +31,22 @@ try {
     process.exit(3);
 }
 
-const BTUTokenSale = require('../build/contracts/BTUTokenSale.json');
-const BTU = require('../build/contracts/BTU.json');
+const BTUTokenSale = require('../build/contracts/BTUTokenSale');
+const BTU = require('../build/contracts/BTU');
+
+// When using real ethereum account
+var HDWalletProvider = require("truffle-hdwallet-provider");
+var mnemonic = "impact stay fish oil hover solar excess monster output fence razor celery";
+var provider = new HDWalletProvider(mnemonic, "https://ropsten.infura.io/DYBja4A1RKCdnSP4DMYt");
+
 const Web3 = require('web3');
-web3 = new Web3(new Web3.providers.HttpProvider(ethereumNodeURL));
+var web3 = new Web3();
+web3.setProvider(provider);
+
+web3.eth.net.isListening().then(function(res) {
+    console.log("IsConnected = " + res);
+});
+
 
 let btuTokenSale = new web3.eth.Contract(BTUTokenSale.abi, tokenSaleAddress);
 console.log("BTUTokenSale address = " + BTUTokenSale.address);
@@ -53,16 +65,7 @@ batchFileData.forEach(function(account) {
     }
 });
 
-/* // When using real ethereum account
-console.log("Unlocking account ...");
-try {
-    web3.personal.unlockAccount(web3.eth.accounts[0], password);
-} catch(e) {
-    console.log(e);
-    return;
-}
-console.log("Unlock OK");
-*/
+
 
 //web3.eth.defaultAccount = web3.eth.accounts[0];
 
