@@ -7,7 +7,7 @@ module.exports = {
      *  development configuration is defined to work
      *  with truffle develop
      */
-    localhost: {
+    development: {
       host: "localhost",    // localhost for tests
       port: 9545,           // truffle develop port
       network_id: "*",      // Match any network id

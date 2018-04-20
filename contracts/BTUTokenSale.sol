@@ -2,8 +2,8 @@ pragma solidity ^0.4.0;
 
 import "./BTU.sol";
 
-import "zeppelin-solidity/contracts/ownership/Ownable.sol";
-import "zeppelin-solidity/contracts/math/SafeMath.sol";
+import "../../node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "../../node_modules/zeppelin-solidity/contracts/math/SafeMath.sol";
 
 /* This contract is usable by the BTU's owner only unless ownership is transferred.
  * In that case the owner of the BTU has to approve every transfer.

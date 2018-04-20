@@ -1,6 +1,6 @@
 pragma solidity ^0.4.0;
 
-import "zeppelin-solidity/contracts/token/ERC20/CappedToken.sol";
+import "../../node_modules/zeppelin-solidity/contracts/token/ERC20/CappedToken.sol";
 /**
  * The address which deployed the BTU contract can tranfer the INITIAL_FUNDS
  * by using the ERC20's funtion tranfer(address to, uint256 amount).
