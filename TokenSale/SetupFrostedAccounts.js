@@ -8,7 +8,7 @@ let infuraAPIKey = process.argv[4];
 let ethereumNodeURL = process.argv[5];
 
 let usage = "From git root dir: \n" +
-            "node TokenSale/SetupFrostedAccounts TokenSaleAddress MnemonicFilePath infuraAPIKey\n");
+            "node TokenSale/SetupFrostedAccounts.js TokenSaleAddress MnemonicFilePath InfuraAPIKey\n";
 
 if (tokenSaleAddress == undefined || mnemonicFilePath == undefined || infuraAPIKey == undefined)
 {
@@ -43,7 +43,7 @@ else {
 }
 
 let btuTokenSale = new web3.eth.Contract(BTUTokenSale.abi, tokenSaleAddress);
-console.log("BTUTokenSale address = " + BTUTokenSale.address);
+console.log("BTUTokenSale address = " + tokenSaleAddress);
 
 web3.eth.net.isListening().then(function(res) {
     console.log("IsConnected = " + res);

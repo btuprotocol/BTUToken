@@ -23,16 +23,22 @@ contract BTUTokenSale is Ownable {
     address private companyAddress;
     // Amount reserved
     uint256 public companyReserved;
+    // Already defrosted
+    bool public companyReservedDefrosted;
 
     // Address of the founders reserve
     address private foundersAddress;
     // Amount reserved
     uint256 public foundersReserved;
+    // Already defrosted
+    bool public foundersReservedDefrosted;
 
     // Address of the bounty reserve
     address private bountyAddress;
     // Amount reserved
     uint256 public bountyReserved;
+    // Already defrosted
+    bool public bountyReservedDefrosted;
 
     // Number of assigned tokens to date
     uint256 public assignedTokens;
@@ -44,6 +50,9 @@ contract BTUTokenSale is Ownable {
     function BTUTokenSale() public {
         owner = msg.sender;
         btuToken = new BTU();
+        companyReservedDefrosted = false;
+        foundersReservedDefrosted = false;
+        bountyReservedDefrosted = false;
     }
 
     /* Assignment of tokens has to be done by the owner of the BTUToken
@@ -82,11 +91,12 @@ contract BTUTokenSale is Ownable {
 
     // Frost period for the frosted company tokens
     function defrostCompanyDate() internal view returns(uint256){
-        return SALE_START_DATE + FROSTED_COMPANY_LOCKUP * 1 years;
+        return SALE_START_DATE + FROSTED_COMPANY_LOCKUP * 1 minutes;
     }
 
     // Defrost company reserved tokens
     function defrostCompanyTokens() public onlyOwner {
+        require(companyReservedDefrosted == false);
         require(now > defrostCompanyDate());
         BTU(btuToken).transfer(companyAddress, companyReserved);
     }
@@ -98,12 +108,14 @@ contract BTUTokenSale is Ownable {
 
     // Defrost founders reserved tokens (only usable after the frost period is over)
     function defrostFoundersTokens() public onlyOwner {
+        require(foundersReservedDefrosted == false);
         require(now > defrostFoundersDate());
         BTU(btuToken).transfer(foundersAddress, foundersReserved);
     }
 
     // No frost period for the bounty, the owner can defrost at will
     function defrostBountyTokens() public onlyOwner {
+        require(bountyReservedDefrosted == false);
         BTU(btuToken).transfer(bountyAddress, bountyReserved);
     }
 

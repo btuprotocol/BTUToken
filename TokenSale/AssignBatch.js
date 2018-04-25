@@ -6,7 +6,7 @@ let infuraAPIKey = process.argv[5];
 let ethereumNodeURL = process.argv[6];
 
 let usage = "From git root dir: \n" +
-            "node TokenSale/Assign TokenSaleAddress MnemonicFilePath infuraAPIKey\n");
+            "node TokenSale/AssignBatch.js BatchFilePath TokenSaleAddress MnemonicFilePath infuraAPIKey\n");
 
 if (tokenSaleAddress == undefined || batchFilePath == undefined) {
     console.log(usage);
@@ -53,7 +53,7 @@ web3.eth.net.isListening().then(function(res) {
 
 
 let btuTokenSale = new web3.eth.Contract(BTUTokenSale.abi, tokenSaleAddress);
-console.log("BTUTokenSale address = " + BTUTokenSale.address);
+console.log("BTUTokenSale address = " + tokenSaleAddress);
 
 console.log("Accounts: \n" + batchFileData.join('\n'));
 let addresses = [];
