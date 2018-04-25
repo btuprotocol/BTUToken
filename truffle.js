@@ -11,7 +11,7 @@ module.exports = {
       host: "localhost",    // localhost for tests
       port: 9545,           // truffle develop port
       network_id: "*",      // Match any network id
-      gas: 4712388          // Standard gas limit
+      gas: 4612388          // Standard gas limit
     },
     metamask: {
         provider: function() {
@@ -19,7 +19,15 @@ module.exports = {
         },
         port: 443,
         network_id: "3",
-        gas: 4712388          // Standard gas limit
+        gas: 4612388          // Standard gas limit
+    },
+    mainnet: {
+        provider: function() {
+            return new HDWalletProvider(mnemonic, "https://mainnet.infura.io/DYBja4A1RKCdnSP4DMYt");
+        },
+        port: 443,
+        network_id: "1",
+        gas: 4612388          // Standard gas limit
     }
   }
 };

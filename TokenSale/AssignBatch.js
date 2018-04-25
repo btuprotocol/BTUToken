@@ -1,20 +1,15 @@
 // Setup variables such as the ethereumNodeURL and the batch file
 let batchFilePath = process.argv[2];
 let tokenSaleAddress = process.argv[3];
-let ethereumNodeURL = process.argv[4];
+let mnemonicFilePath = process.argv[4];
+let infuraAPIKey = process.argv[5];
+let ethereumNodeURL = process.argv[6];
 
-if (ethereumNodeURL == undefined) {
-    ethereumNodeURL = 'http://localhost:9545';
-}
+let usage = "";
 
-if (tokenSaleAddress == undefined) {
-    console.log('This script needs the BTUTokenSale contract address !');
+if (tokenSaleAddress == undefined || batchFilePath == undefined) {
+    console.log(usage);
     process.exit(1);
-}
-
-if (batchFilePath == undefined) {
-    console.log('This script needs a batch file to assign token to addresses !');
-    process.exit(2);
 }
 
 const fs = require('fs');
@@ -34,14 +29,21 @@ try {
 const BTUTokenSale = require('../build/contracts/BTUTokenSale');
 const BTU = require('../build/contracts/BTU');
 
-// When using real ethereum account
-var HDWalletProvider = require("truffle-hdwallet-provider");
-var mnemonic = "impact stay fish oil hover solar excess monster output fence razor celery";
-var provider = new HDWalletProvider(mnemonic, "https://ropsten.infura.io/DYBja4A1RKCdnSP4DMYt");
-
 const Web3 = require('web3');
 var web3 = new Web3();
-web3.setProvider(provider);
+
+if (ethereumNodeURL == undefined) {
+    // When using real ethereum account
+    var HDWalletProvider = require("truffle-hdwallet-provider");
+    const MNEMONIC_FILE_PATH = path.resolve(mnemonicFilePath);
+    var mnemonic = fs.readFileSync(MNEMONIC_FILE_PATH);
+    var provider = new HDWalletProvider(mnemonic, "https://ropsten.infura.io/" + infuraAPIKey);
+
+    web3.setProvider(provider);
+}
+else {
+    web3.setProvider(ethereumNodeURL);
+}
 
 web3.eth.net.isListening().then(function(res) {
     console.log("IsConnected = " + res);

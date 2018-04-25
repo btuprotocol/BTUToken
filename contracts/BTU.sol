@@ -18,10 +18,10 @@ import "zeppelin-solidity/contracts/token/ERC20/CappedToken.sol";
  * an action only for the owner.
  */
 contract BTU is CappedToken {
-    string public name = "BookingTokenUnit";
+    string public name = "BTU Protocol";
     string public symbol = "BTU";
     uint8 public decimals = 18;
-    uint public constant INITIAL_SUPPLY = 100000000 * 10 ** 18;
+    uint public constant INITIAL_SUPPLY = 100000000 * 10 ** 18; // 100 millions tokens
 
     /**
      * On construction, the owner balance is set with

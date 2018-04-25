@@ -19,19 +19,28 @@ contract BTUTokenSale is Ownable {
     uint public constant FROSTED_COMPANY_LOCKUP = 2;    // 2 years lockup
     uint public constant FROSTED_FOUNDERS_LOCKUP = 1;   // 1 year lockup
 
+    // Address of the company reserve
     address private companyAddress;
+    // Amount reserved
     uint256 public companyReserved;
 
+    // Address of the founders reserve
     address private foundersAddress;
+    // Amount reserved
     uint256 public foundersReserved;
 
+    // Address of the bounty reserve
     address private bountyAddress;
+    // Amount reserved
     uint256 public bountyReserved;
 
+    // Number of assigned tokens to date
     uint256 public assignedTokens;
 
+    // Address of BTUToken smart contract
     address public btuToken;
 
+    // Construtor
     function BTUTokenSale() public {
         owner = msg.sender;
         btuToken = new BTU();
