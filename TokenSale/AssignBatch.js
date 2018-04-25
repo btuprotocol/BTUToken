@@ -5,7 +5,8 @@ let mnemonicFilePath = process.argv[4];
 let infuraAPIKey = process.argv[5];
 let ethereumNodeURL = process.argv[6];
 
-let usage = "";
+let usage = "From git root dir: \n" +
+            "node TokenSale/Assign TokenSaleAddress MnemonicFilePath infuraAPIKey\n");
 
 if (tokenSaleAddress == undefined || batchFilePath == undefined) {
     console.log(usage);
@@ -37,6 +38,7 @@ if (ethereumNodeURL == undefined) {
     var HDWalletProvider = require("truffle-hdwallet-provider");
     const MNEMONIC_FILE_PATH = path.resolve(mnemonicFilePath);
     var mnemonic = fs.readFileSync(MNEMONIC_FILE_PATH);
+    mnemonic = mnemonic.toString().replace(/(\r\n\t|\n|\r\t)/gm,"");
     var provider = new HDWalletProvider(mnemonic, "https://ropsten.infura.io/" + infuraAPIKey);
 
     web3.setProvider(provider);

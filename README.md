@@ -21,10 +21,20 @@ A token sale contract (BTUTokenSale) is also present in this repository, it is c
 
     -   npm install
 
-**Run the context :**
+**Setup your account**
+
+    In `truffle.js` :
+    -   Change the mnemonic to yours
+    -   Change the infura API key if you are using ropsten
+
+**Run the context in local :**
 
     -   truffle develop
     -   migrate
+
+**Run the context on ropsten :**
+
+    - truffle --network metamask migrate
 
 **Run tests :**
 

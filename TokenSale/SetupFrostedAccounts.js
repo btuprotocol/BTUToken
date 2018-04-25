@@ -7,6 +7,15 @@ let mnemonicFilePath = process.argv[3];
 let infuraAPIKey = process.argv[4];
 let ethereumNodeURL = process.argv[5];
 
+let usage = "From git root dir: \n" +
+            "node TokenSale/SetupFrostedAccounts TokenSaleAddress MnemonicFilePath infuraAPIKey\n");
+
+if (tokenSaleAddress == undefined || mnemonicFilePath == undefined || infuraAPIKey == undefined)
+{
+    console.log(usage);
+    process.exit(1);
+}
+
 const fs = require('fs');
 const path = require('path');
 
