@@ -99,6 +99,7 @@ contract BTUTokenSale is Ownable {
         require(companyReservedDefrosted == false);
         require(now > defrostCompanyDate());
         BTU(btuToken).transfer(companyAddress, companyReserved);
+        companyReservedDefrosted = true;
     }
 
     // Frost period for the frosted founders tokens
@@ -111,12 +112,14 @@ contract BTUTokenSale is Ownable {
         require(foundersReservedDefrosted == false);
         require(now > defrostFoundersDate());
         BTU(btuToken).transfer(foundersAddress, foundersReserved);
+        foundersReservedDefrosted = true;
     }
 
     // No frost period for the bounty, the owner can defrost at will
     function defrostBountyTokens() public onlyOwner {
         require(bountyReservedDefrosted == false);
         BTU(btuToken).transfer(bountyAddress, bountyReserved);
+        bountyReservedDefrosted = true;
     }
 
     // Selfdestruct this contract
