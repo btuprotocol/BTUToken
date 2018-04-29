@@ -1,4 +1,4 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.4.21;
 
 import "zeppelin-solidity/contracts/token/ERC20/CappedToken.sol";
 /**
@@ -18,22 +18,18 @@ import "zeppelin-solidity/contracts/token/ERC20/CappedToken.sol";
  * an action only for the owner.
  */
 contract BTU is CappedToken {
-    string public name = "BTU Protocol";
-    string public symbol = "BTU";
-    uint8 public decimals = 18;
+    string public constant name = "BTU Protocol";
+    string public constant symbol = "BTU";
+    uint8 public constant decimals = 18;
     uint public constant INITIAL_SUPPLY = 100000000 * 10 ** 18; // 100 millions tokens
 
     /**
-     * On construction, the owner balance is set with
-     * the INITIAL_FUNDS amount.
+     * On construction, the owner balance is set with the INITIAL_FUNDS amount.
      * Distribution of BTUs can be done from the owner address.
+     * _totalSupply is inherited from CappedToken and determine how many tokens are created when the contract is created
      */
     function BTU() public CappedToken(INITIAL_SUPPLY) {
         totalSupply_ = INITIAL_SUPPLY;
         balances[msg.sender] = INITIAL_SUPPLY;
-    }
-
-    function getOwner() public view returns(address) {
-        return owner;
     }
 }
