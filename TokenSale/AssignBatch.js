@@ -6,7 +6,7 @@ let infuraAPIKey = process.argv[5];
 let ethereumNodeURL = process.argv[6];
 
 let usage = "From git root dir: \n" +
-            "node TokenSale/AssignBatch.js BatchFilePath TokenSaleAddress MnemonicFilePath infuraAPIKey\n");
+            "node TokenSale/AssignBatch.js BatchFilePath TokenSaleAddress MnemonicFilePath infuraAPIKey\n";
 
 if (tokenSaleAddress == undefined || batchFilePath == undefined) {
     console.log(usage);
@@ -75,7 +75,7 @@ batchFileData.forEach(function(account) {
 
 function getBTUToken() {
     return new Promise(function(resolve, reject) {
-        btuTokenSale.methods.btuToken().call(function(err, res) {
+        btuTokenSale.methods.btuTokenAddress().call(function(err, res) {
             if (err) return reject(err);
             resolve(res);
         });
@@ -85,6 +85,8 @@ function getBTUToken() {
 function assignBatch(account, addrs, amnts) {
     return new Promise(function(resolve, reject) {
 
+        console.log("addrs = " + addrs);
+        console.log("amnts = " + amnts);
         btuTokenSale.methods.assignTokens(addrs, amnts).estimateGas({from: account}).then(function(estimatedGas) {
             console.log("Estimated gas = " + estimatedGas);
             // Add 10% to the gas limit
