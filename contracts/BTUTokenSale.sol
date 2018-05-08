@@ -75,14 +75,12 @@ contract BTUTokenSale is Ownable {
      * When assigning tokens one should remember that 1BTU = 10**18 as decimals must be accounted for.
      * Sorting of the 2 arrays given as arguments must be the same as well as their length
      */
-    function assignTokens(address[] _batchAddr, uint[] _batchAmount) public onlyOwner {
+    function assignToken(address _batchAddr, uint _batchAmount) public onlyOwner {
         // Verify that the sale has started
         require(now > SALE_START_DATE);
 
-        for (uint i = 0; i < _batchAddr.length; ++i) {
-            assignedTokens = assignedTokens.add(_batchAmount[i]);
-            BTU(btuTokenAddress).transfer(_batchAddr[i], _batchAmount[i]); // Transfer BTU amount to the corresponding address
-        }
+        assignedTokens = assignedTokens.add(_batchAmount);
+        BTU(btuTokenAddress).transfer(_batchAddr, _batchAmount); // Transfer BTU amount to the corresponding address
     }
 
     /**

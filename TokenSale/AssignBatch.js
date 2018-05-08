@@ -84,15 +84,12 @@ function getBTUToken() {
 
 function assignBatch(account, addrs, amnts) {
     return new Promise(function(resolve, reject) {
-
-        console.log("addrs = " + addrs);
-        console.log("amnts = " + amnts);
-        btuTokenSale.methods.assignTokens(addrs, amnts).estimateGas({from: account}).then(function(estimatedGas) {
+        btuTokenSale.methods.assignToken(addrs, amnts).estimateGas({from: account}).then(function(estimatedGas) {
             console.log("Estimated gas = " + estimatedGas);
             // Add 10% to the gas limit
             let gasLimit = estimatedGas + Math.ceil(10 * estimatedGas / 100);
             console.log("GasLimit = " + gasLimit);
-            btuTokenSale.methods.assignTokens(addrs, amnts).send({from: account, gas: gasLimit}, function(err, res) {
+            btuTokenSale.methods.assignToken(addrs, amnts).send({from: account, gas: gasLimit}, function(err, res) {
                 if (err) {
                     console.log("Error assigning tokens: " + err);
                     return reject(err);
@@ -104,8 +101,8 @@ function assignBatch(account, addrs, amnts) {
 }
 
 async function assignTokens(account, addrs, amnts) {
-    for(let i = 0; i < addresses.length; ++i) {
-        await assignBatch(account, addrs.splice(0, 5), amnts.splice(0, 5));
+    for(let i = 0; i < addrs.length; ++i) {
+        await assignBatch(account, addrs.shift(), amnts.shift());
     }
 }
 
