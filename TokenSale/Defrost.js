@@ -42,47 +42,32 @@ let btuTokenSale = new web3.eth.Contract(BTUTokenSale.abi, tokenSaleAddress);
 console.log("BTUTokenSale address = " + tokenSaleAddress);
 
 async function defrostCompanyTokens(account) {
-    btuTokenSale.methods.defrostCompanyTokens().estimateGas({from: account}).then(function(estimatedGas) {
-        console.log("Estimated gas = " + estimatedGas);
-        // Add 10% to the gas limit
-        let gasLimit = estimatedGas + Math.ceil(10 * estimatedGas / 100);
-        btuTokenSale.methods.defrostCompanyTokens().send({from: account, gas: gasLimit}, function(err, res) {
-            if (err) {
-                console.log("Error in tokenSale setup: " + err);
-                return err;
-            }
-            return res;
-        });
+    btuTokenSale.methods.defrostCompanyTokens().send({from: account, gasLimit: 500000}, function(err, res) {
+        if (err) {
+            console.log("Error in tokenSale setup: " + err);
+            return err;
+        }
+        return res;
     });
 }
 
 async function defrostFoundersTokens(account) {
-    btuTokenSale.methods.defrostFoundersTokens().estimateGas({from: account}).then(function(estimatedGas) {
-        console.log("Estimated gas = " + estimatedGas);
-        // Add 10% to the gas limit
-        let gasLimit = estimatedGas + Math.ceil(10 * estimatedGas / 100);
-        btuTokenSale.methods.defrostFoundersTokens().send({from: account, gas: gasLimit}, function(err, res) {
-            if (err) {
-                console.log("Error in tokenSale setup: " + err);
-                return err;
-            }
-            return res;
-        });
+    btuTokenSale.methods.defrostFoundersTokens().send({from: account, gasLimit: 500000}, function(err, res) {
+        if (err) {
+            console.log("Error in tokenSale setup: " + err);
+            return err;
+        }
+        return res;
     });
 }
 
 async function defrostBountyTokens(account) {
-    btuTokenSale.methods.defrostBountyTokens().estimateGas({from: account}).then(function(estimatedGas) {
-        console.log("Estimated gas = " + estimatedGas);
-        // Add 10% to the gas limit
-        let gasLimit = estimatedGas + Math.ceil(10 * estimatedGas / 100);
-        btuTokenSale.methods.defrostBountyTokens().send({from: account, gas: gasLimit}, function(err, res) {
-            if (err) {
-                console.log("Error in tokenSale setup: " + err);
-                return err;
-            }
-            return res;
-        });
+    btuTokenSale.methods.defrostBountyTokens().send({from: account, gasLimit: 500000}, function(err, res) {
+        if (err) {
+            console.log("Error in tokenSale setup: " + err);
+            return err;
+        }
+        return res;
     });
 }
 
