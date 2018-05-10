@@ -15,6 +15,7 @@ if (tokenSaleAddress == undefined || batchFilePath == undefined) {
 
 const fs = require('fs');
 const path = require('path');
+const BigNumber = require('bignumber.js')
 
 let batchFileData = [];
 
@@ -62,7 +63,7 @@ batchFileData.forEach(function(account) {
     let values = account.split(',').filter(x => x);
     if (values.length == 2) {
         addresses.push(values[0]);
-        amounts.push(parseInt(values[1]));
+        amounts.push(new BigNumber(values[1]));
     } else {
         console.log("Error parsing batch file !");
         process.exit(4);
@@ -94,6 +95,7 @@ function assignBatch(account, addrs, amnts, n) {
                     console.log("Error assigning tokens: " + err);
                     return reject(err);
                 }
+                console.log("tx:" + res);
                 resolve(res);
             });
         });
@@ -101,8 +103,8 @@ function assignBatch(account, addrs, amnts, n) {
 }
 
 async function assignTokens(account, addrs, amnts) {
-    for(let i = 0; i < addrs.length; ++i) {
-    console.log("Address n°" + i + " : " + addrs[0]);
+    for(let i = 0; i < addresses.length; ++i) {
+        console.log("Address n°" + (i + 1) + " : " + addrs[0]);
         await assignBatch(account, addrs.shift(), amnts.shift());
     }
 }

@@ -41,42 +41,55 @@ else {
 let btuTokenSale = new web3.eth.Contract(BTUTokenSale.abi, tokenSaleAddress);
 console.log("BTUTokenSale address = " + tokenSaleAddress);
 
-async function defrostCompanyTokens(account) {
-    btuTokenSale.methods.defrostCompanyTokens().send({from: account, gasLimit: 500000}, function(err, res) {
-        if (err) {
-            console.log("Error in tokenSale defrost: " + err);
-            return err;
-        }
-        return res;
+function defrostCompanyTokens(account) {
+    return new Promise(function(resolve, reject) {
+        btuTokenSale.methods.defrostCompanyTokens().send({from: account, gasLimit: 500000}, function(err, res) {
+            if (err) {
+                console.log("Error in tokenSale defrost: " + err);
+                return reject(err);
+            }
+            console.log(res);
+            return resolve(res);
+        });
     });
 }
 
-async function defrostFoundersTokens(account) {
-    btuTokenSale.methods.defrostFoundersTokens().send({from: account, gasLimit: 500000}, function(err, res) {
-        if (err) {
-            console.log("Error in tokenSale defrost: " + err);
-            return err;
-        }
-        return res;
+function defrostFoundersTokens(account) {
+    return new Promise(function(resolve, reject) {
+        btuTokenSale.methods.defrostFoundersTokens().send({from: account, gasLimit: 500000}, function(err, res) {
+            if (err) {
+                console.log("Error in tokenSale defrost: " + err);
+                return reject(err);
+            }
+            console.log(res);
+            return resolve(res);
+        });
     });
 }
 
-async function defrostBountyTokens(account) {
-    btuTokenSale.methods.defrostBountyTokens().send({from: account, gasLimit: 500000}, function(err, res) {
-        if (err) {
-            console.log("Error in tokenSale defrost: " + err);
-            return err;
-        }
-        return res;
+function defrostBountyTokens(account) {
+    return new Promise(function(resolve, reject) {
+        btuTokenSale.methods.defrostBountyTokens().send({from: account, gasLimit: 500000}, function(err, res) {
+            if (err) {
+                console.log("Error in tokenSale defrost: " + err);
+                return reject(err);
+            }
+            console.log(res);
+            return resolve(res);
+        });
     });
+}
+
+async function defrost(accounts) {
+    if (account == "company")
+        await defrostCompanyTokens(accounts[0]);
+    else if (account =="founders")
+        await defrostFoundersTokens(accounts[0]);
+    else if (account == "bounty")
+        await defrostBountyTokens(accounts[0]);
 }
 
 web3.eth.getAccounts(function(error, accounts) {
     console.log("Using account: " + accounts[0]);
-    if (account == "company")
-        return defrostCompanyTokens(accounts[0]);
-    else if (account =="founders")
-        return defrostFoundersTokens(accounts[0]);
-    else if (account == "bounty")
-        return defrostBountyTokens(accounts[0]);
+    defrost(accounts);
 });

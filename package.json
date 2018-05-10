@@ -7,11 +7,12 @@
     "test": "test"
   },
   "dependencies": {
+    "big-number": "^0.4.0",
     "chai": "^4.1.2",
+    "openzeppelin-solidity": "^1.9.0",
     "testrpc": "^0.0.1",
     "truffle-hdwallet-provider": "0.0.3",
-    "web3": "1.0.0-beta.33",
-    "openzeppelin-solidity": "^1.9.0"
+    "web3": "1.0.0-beta.33"
   },
   "devDependencies": {
     "mocha": "^5.0.1"
