@@ -83,7 +83,7 @@ function getBTUToken() {
     });
 }
 
-function assignBatch(account, addrs, amnts, n) {
+function assignBatch(account, addrs, amnts) {
     return new Promise(function(resolve, reject) {
         btuTokenSale.methods.assignToken(addrs, amnts).estimateGas({from: account}).then(function(estimatedGas) {
             console.log("Estimated gas = " + estimatedGas);
@@ -103,7 +103,8 @@ function assignBatch(account, addrs, amnts, n) {
 }
 
 async function assignTokens(account, addrs, amnts) {
-    for(let i = 0; i < addresses.length; ++i) {
+    let num = addrs.length;
+    for(let i = 0; i < num; ++i) {
         console.log("Address n°" + (i + 1) + " : " + addrs[0]);
         await assignBatch(account, addrs.shift(), amnts.shift());
     }
