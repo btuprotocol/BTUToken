@@ -1,4 +1,4 @@
-pragma solidity ^0.4.21;
+pragma solidity ^0.4.23;
 
 import "./BTU.sol";
 
@@ -11,8 +11,7 @@ contract BTUTokenSale is Ownable {
 
     using SafeMath for uint256;
 
-    // uint256 public constant ICO_START_DATE = 1524009600; // 18/04/2018 00:00 GMT Start date to be uncommented when deployed
-    uint256 public SALE_START_DATE = now; // For tests only
+    uint256 public SALE_START_DATE = now;
 
     uint public constant FROST_COMPANY_FACTOR = 20;  // 20% reserved for the company
     uint public constant FROST_FOUNDERS_FACTOR = 20; // 20% reserved for the founders
@@ -61,7 +60,7 @@ contract BTUTokenSale is Ownable {
     address public btuTokenAddress;
 
     // Construtor
-    function BTUTokenSale() public {
+    constructor() public {
         owner = msg.sender;
         btuTokenAddress = new BTU();
         companyReservedDefrosted = false;
@@ -76,9 +75,6 @@ contract BTUTokenSale is Ownable {
      * Sorting of the 2 arrays given as arguments must be the same as well as their length
      */
     function assignToken(address _batchAddr, uint _batchAmount) public onlyOwner {
-        // Verify that the sale has started
-        require(now > SALE_START_DATE);
-
         assignedTokens = assignedTokens.add(_batchAmount);
         BTU(btuTokenAddress).transfer(_batchAddr, _batchAmount); // Transfer BTU amount to the corresponding address
     }
@@ -99,41 +95,45 @@ contract BTUTokenSale is Ownable {
         foundersReserved = initialSupply.mul(FROST_FOUNDERS_FACTOR) / 100;
         bountyReserved = initialSupply.mul(FROST_BOUNTY_FACTOR) / 100;
         // Keep track of the number of assigned tokens
-        assignedTokens = companyReserved.add(foundersReserved);
+        assignedTokens = assignedTokens.add(companyReserved);
+        assignedTokens = assignedTokens.add(foundersReserved);
         assignedTokens = assignedTokens.add(bountyReserved);
     }
 
     // Frost period for the frosted company tokens
     function defrostCompanyDate() internal view returns(uint256){
-        return SALE_START_DATE.add(FROSTED_COMPANY_LOCKUP).mul(1 years);
+        return SALE_START_DATE.add(FROSTED_COMPANY_LOCKUP).mul(2 years);
     }
 
     // Defrost company reserved tokens
-    function defrostCompanyTokens() public onlyOwner {
+    function defrostCompanyTokens() public onlyOwner returns(bool) {
         require(companyReservedDefrosted == false);
         require(now > defrostCompanyDate());
         BTU(btuTokenAddress).transfer(companyAddress, companyReserved);
         companyReservedDefrosted = true;
+        return true;
     }
 
     // Frost period for the frosted founders tokens
-    function defrostFoundersDate() internal view returns(uint256){
+    function defrostFoundersDate() internal view returns(uint256) {
         return SALE_START_DATE.add(FROSTED_FOUNDERS_LOCKUP).mul(1 years);
     }
 
     // Defrost founders reserved tokens (only usable after the frost period is over)
-    function defrostFoundersTokens() public onlyOwner {
+    function defrostFoundersTokens() public onlyOwner returns(bool) {
         require(foundersReservedDefrosted == false);
         require(now > defrostFoundersDate());
         BTU(btuTokenAddress).transfer(foundersAddress, foundersReserved);
         foundersReservedDefrosted = true;
+        return true;
     }
 
     // No frost period for the bounty, the owner can defrost at will
-    function defrostBountyTokens() public onlyOwner {
+    function defrostBountyTokens() public onlyOwner returns(bool) {
         require(bountyReservedDefrosted == false);
         BTU(btuTokenAddress).transfer(bountyAddress, bountyReserved);
         bountyReservedDefrosted = true;
+        return true;
     }
 
     // Selfdestruct this contract

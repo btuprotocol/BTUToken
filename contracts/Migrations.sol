@@ -2,7 +2,7 @@
  * First migration file => we need informations about this process
  * everything isn't totally clear.
  */
-pragma solidity ^0.4.2;
+pragma solidity ^0.4.23;
 
 
 contract Migrations {

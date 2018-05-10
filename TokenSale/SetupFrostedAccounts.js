@@ -1,6 +1,6 @@
-let companyAddress = "0xa0092f550A3576D01ddeA5d83F8B6fA1b528bF40";
-let foundersAddress = "0xe538EFAEc69E48fBa53F7f567C56A303B0d925C3";
-let bountyAddress = "0xA3AA6265BE53D0E13CC9Ed9e7dfd9aabB51708C8";
+let companyAddress = "0x6148311D9ad93c9299AE03Ac35104194ebEeD600";
+let foundersAddress = "0x3cA081445e02eA6d8E5645Bb68Be8C4493700Dad";
+let bountyAddress = "0xE2339a32b2E14C484217A50080fb13766C6F73c1";
 
 let tokenSaleAddress = process.argv[2];
 let mnemonicFilePath = process.argv[3];

@@ -15,7 +15,7 @@ module.exports = {
     },
     metamask: {
         provider: function() {
-            return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/DYBja4A1RKCdnSP4DMYt");
+            return new HDWalletProvider(mnemonic, "https://ropsten.infura.io/eMZlOOUqf46HCsUSmnYo");
         },
         port: 443,
         network_id: "3",
@@ -23,7 +23,7 @@ module.exports = {
     },
     mainnet: {
         provider: function() {
-            return new HDWalletProvider(mnemonic, "https://mainnet.infura.io/DYBja4A1RKCdnSP4DMYt");
+            return new HDWalletProvider(mnemonic, "https://mainnet.infura.io/eMZlOOUqf46HCsUSmnYo");
         },
         port: 443,
         network_id: "1",
