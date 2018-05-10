@@ -86,9 +86,11 @@ function verifyAmount(btu, addr, amnt) {
                 console.log("Error verifying tokens: " + err);
                 return reject(err);
             }
-            if (amnt != res)
+            console.log(res);
+            bg = new BigNumber(res);
+            if (amnt.toNumber() != res)
             {
-                console.log("\033[33mWarning: amount in batch(" + amnt + ") does not equal amount on account (" + res + ")\033[0m");
+                console.log("\033[33mWarning: amount in batch(" + amnt + ") does not equal amount on account (" + bg + ")\033[0m");
             }
             resolve(res);
         });
