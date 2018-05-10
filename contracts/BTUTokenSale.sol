@@ -102,7 +102,7 @@ contract BTUTokenSale is Ownable {
 
     // Frost period for the frosted company tokens
     function defrostCompanyDate() internal view returns(uint256){
-        return SALE_START_DATE.add(FROSTED_COMPANY_LOCKUP).mul(1 years);
+        return SALE_START_DATE.add(FROSTED_COMPANY_LOCKUP.mul(1 years));
     }
 
     // Defrost company reserved tokens
@@ -116,7 +116,7 @@ contract BTUTokenSale is Ownable {
 
     // Frost period for the frosted founders tokens
     function defrostFoundersDate() internal view returns(uint256) {
-        return SALE_START_DATE.add(FROSTED_FOUNDERS_LOCKUP).mul(1 years);
+        return SALE_START_DATE.add(FROSTED_FOUNDERS_LOCKUP.mul(1 years));
     }
 
     // Defrost founders reserved tokens (only usable after the frost period is over)

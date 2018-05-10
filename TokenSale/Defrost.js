@@ -44,7 +44,7 @@ console.log("BTUTokenSale address = " + tokenSaleAddress);
 async function defrostCompanyTokens(account) {
     btuTokenSale.methods.defrostCompanyTokens().send({from: account, gasLimit: 500000}, function(err, res) {
         if (err) {
-            console.log("Error in tokenSale setup: " + err);
+            console.log("Error in tokenSale defrost: " + err);
             return err;
         }
         return res;
@@ -54,7 +54,7 @@ async function defrostCompanyTokens(account) {
 async function defrostFoundersTokens(account) {
     btuTokenSale.methods.defrostFoundersTokens().send({from: account, gasLimit: 500000}, function(err, res) {
         if (err) {
-            console.log("Error in tokenSale setup: " + err);
+            console.log("Error in tokenSale defrost: " + err);
             return err;
         }
         return res;
@@ -64,7 +64,7 @@ async function defrostFoundersTokens(account) {
 async function defrostBountyTokens(account) {
     btuTokenSale.methods.defrostBountyTokens().send({from: account, gasLimit: 500000}, function(err, res) {
         if (err) {
-            console.log("Error in tokenSale setup: " + err);
+            console.log("Error in tokenSale defrost: " + err);
             return err;
         }
         return res;
