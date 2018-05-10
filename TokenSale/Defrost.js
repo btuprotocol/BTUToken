@@ -74,9 +74,9 @@ async function defrostBountyTokens(account) {
 web3.eth.getAccounts(function(error, accounts) {
     console.log("Using account: " + accounts[0]);
     if (account == "company")
-        defrostCompanyTokens(accounts[0]);
+        return defrostCompanyTokens(accounts[0]);
     else if (account =="founders")
-        defrostFoundersTokens(accounts[0]);
+        return defrostFoundersTokens(accounts[0]);
     else if (account == "bounty")
-        defrostBountyTokens(accounts[0]);
+        return defrostBountyTokens(accounts[0]);
 });
