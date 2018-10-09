@@ -3,6 +3,11 @@
 The BTU Token is the ERC-20 token smart contract token to be used in conjonction with the ERC-808 smart contract in order to make reservations over the BTU Protocol.
 A token sale contract (BTUTokenSale) is also present in this repository, it is complemented by scripts to assign tokens when the BTUToken is released.
 
+# BTU Token ropsten and wallet information 
+    - BTU Token adress : 0xfcd404ec70c662128d3a6bd508dfb3e598d79a0c 
+    - Symbol                    : BTU
+    - Decimal                   : 18
+
 # BTU Token mainnet and wallet information 
     - BTU Token adress : 0xb683D83a532e2Cb7DFa5275eED3698436371cc9f 
     - Symbol                    : BTU
