@@ -3,7 +3,7 @@
 The BTU Token is the ERC-20 token smart contract token to be used in conjonction with the ERC-808 smart contract in order to make reservations over the BTU Protocol.
 A token sale contract (BTUTokenSale) is also present in this repository, it is complemented by scripts to assign tokens when the BTUToken is released.
 
-# BTU Token on Ethereum Mainnet (and Goerli) 
+# BTU Token on Ethereum Mainnet, Ethereum Goerli & Ethereum Rinkeby 
     - BTU Token adress : 0xb683D83a532e2Cb7DFa5275eED3698436371cc9f 
     - Symbol                    : BTU
     - Decimal                   : 18
@@ -18,7 +18,7 @@ A token sale contract (BTUTokenSale) is also present in this repository, it is c
     - Symbol                    : BTU
     - Decimal                   : 18
 
-The BTU Token is the ERC-20 token smart contract token to be used in conjonction with the ERC-808 smart contract in order to make 
+The BTU token is the ERC-20 token smart contract meant to be used in conjonction with the ERC-808 smart contract. 
 ## Smart contracts
  ### BTUToken
  Implemented using zeppelin's framework, the `BookingTokenUnit` is an ERC-20 capped token. The cap is defined by the initial supply which is 100M tokens. The symbol for the token is `BTU` and it has 18 decimals.
