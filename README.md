@@ -12,7 +12,12 @@ A token sale contract (BTUTokenSale) is also present in this repository, it is c
     - BTU Token adress : 0xfcd404ec70c662128d3a6bd508dfb3e598d79a0c 
     - Symbol                    : BTU
     - Decimal                   : 18
-    
+
+# BTU Token on Ethereum Kovan
+    - BTU Token adress : 0x3010eC3c9b6FAfAd1DaAbABEDA87327E34593002 
+    - Symbol                    : BTU
+    - Decimal                   : 18
+
 The BTU Token is the ERC-20 token smart contract token to be used in conjonction with the ERC-808 smart contract in order to make 
 ## Smart contracts
  ### BTUToken
