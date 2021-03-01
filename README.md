@@ -8,6 +8,11 @@ A token sale contract (BTUTokenSale) is also present in this repository, it is c
     - Symbol                    : BTU
     - Decimal                   : 18
 
+# BTU Token on Matic Mainnet 
+    - BTU Token adress : 0xfdc26cda2d2440d0e83cd1dee8e8be48405806dc 
+    - Symbol                    : BTU
+    - Decimal                   : 18
+
 # BTU Token on Ethereum Ropsten
     - BTU Token adress : 0xfcd404ec70c662128d3a6bd508dfb3e598d79a0c 
     - Symbol                    : BTU
@@ -17,6 +22,12 @@ A token sale contract (BTUTokenSale) is also present in this repository, it is c
     - BTU Token adress : 0x3010eC3c9b6FAfAd1DaAbABEDA87327E34593002 
     - Symbol                    : BTU
     - Decimal                   : 18
+
+# BTU Token on Matic Mumbaï 
+    - BTU Token adress : 0xFf0E710e9AcB1e445b4eD28E05BA26ffBD6a558b 
+    - Symbol                    : BTU
+    - Decimal                   : 18
+
 
 The BTU token is the ERC-20 token smart contract meant to be used in conjonction with the ERC-808 smart contract. 
 ## Smart contracts
