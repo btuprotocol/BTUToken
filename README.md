@@ -4,29 +4,30 @@ The BTU Token is the ERC-20 token smart contract token to be used in conjonction
 A token sale contract (BTUTokenSale) is also present in this repository, it is complemented by scripts to assign tokens when the BTUToken is released.
 
 # BTU Token on Ethereum Mainnet, Ethereum Goerli & Ethereum Rinkeby 
-    - BTU Token address : 0xb683D83a532e2Cb7DFa5275eED3698436371cc9f 
-    - Symbol                    : BTU
-    - Decimal                   : 18
+    - BTU Token address: 0xb683D83a532e2Cb7DFa5275eED3698436371cc9f 
+    - Symbol           : BTU
+    - Decimals         : 18
+    - Logo             : https://btu-protocol.com/assets/0xb683D83a532e2Cb7DFa5275eED3698436371cc9f/logo.png
 
-# BTU Token on Matic Mainnet 
-    - BTU Token address : 0xfdc26cda2d2440d0e83cd1dee8e8be48405806dc 
-    - Symbol                    : BTU
-    - Decimal                   : 18
+# BTU Token on Polygon Network (ex-Matic Mainnet)
+    - BTU Token address: 0xfdc26cda2d2440d0e83cd1dee8e8be48405806dc 
+    - Symbol           : BTU
+    - Decimals         : 18
 
 # BTU Token on Ethereum Ropsten
-    - BTU Token address : 0xfcd404ec70c662128d3a6bd508dfb3e598d79a0c 
-    - Symbol                    : BTU
-    - Decimal                   : 18
+    - BTU Token address: 0xfcd404ec70c662128d3a6bd508dfb3e598d79a0c 
+    - Symbol           : BTU
+    - Decimals         : 18
 
 # BTU Token on Ethereum Kovan
-    - BTU Token address : 0x3010eC3c9b6FAfAd1DaAbABEDA87327E34593002 
-    - Symbol                    : BTU
-    - Decimal                   : 18
+    - BTU Token address: 0x3010eC3c9b6FAfAd1DaAbABEDA87327E34593002 
+    - Symbol           : BTU
+    - Decimals         : 18
 
-# BTU Token on Matic Mumbaï 
-    - BTU Token address : 0xFf0E710e9AcB1e445b4eD28E05BA26ffBD6a558b 
-    - Symbol                    : BTU
-    - Decimal                   : 18
+# BTU Token on Polygon Mumbai (ex-Matic Mumbai)
+    - BTU Token address: 0xFf0E710e9AcB1e445b4eD28E05BA26ffBD6a558b 
+    - Symbol           : BTU
+    - Decimals         : 18
 
 
 The BTU token is the ERC-20 token smart contract meant to be used in conjonction with the ERC-808 smart contract. 
